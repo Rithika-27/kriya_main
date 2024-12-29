@@ -26,11 +26,11 @@
 .animate-scroll {
   display: inline-flex;
   white-space: nowrap; /* Prevent content from wrapping */
-  animation: scroll 20s linear infinite;
+  animation: scroll 7s linear infinite;
 }
 
 .animate-scroll-reverse {
   display: inline-flex;
   white-space: nowrap;
-  animation: scroll-reverse 20s linear infinite;
+  animation: scroll-reverse 7s linear infinite;
 }
