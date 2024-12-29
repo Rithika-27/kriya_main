@@ -30,7 +30,15 @@ export default function Home() {
 
       {/* Third Line: Right Scroll */}
       <div className="flex items-center space-x-10 animate-scroll h-1/4">
-        <h1 className="text-[8vw] font-semibold text-violet-700">Culture</h1>
+        <h1 className="text-[8vw] font-semibold text-violet-700">Culture </h1>
+        <Image
+          src="/images/image3.jpeg"
+          alt="Image 3"
+          width={200}
+          height={200}
+          className="rounded-lg"
+        />
+        <h1 className="text-[8vw] font-semibold text-violet-700">Culture </h1>
         <Image
           src="/images/image3.jpeg"
           alt="Image 3"
