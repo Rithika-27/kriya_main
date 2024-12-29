@@ -2,35 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Keyframes for rightward scrolling */
-@keyframes scroll {
+/* Keyframes for scrolling */
+/* Keyframes for scrolling left to right */
+@keyframes scrollLoop {
   0% {
-    transform: translateX(100%);
+    transform: translateX(0);
   }
   100% {
     transform: translateX(-100%);
   }
 }
 
-/* Keyframes for leftward scrolling */
-@keyframes scroll-reverse {
+/* Keyframes for scrolling right to left */
+@keyframes scrollLoopReverse {
   0% {
     transform: translateX(-100%);
   }
   100% {
-    transform: translateX(100%);
+    transform: translateX(0);
   }
 }
 
-/* Classes for scrolling animations */
-.animate-scroll {
-  display: inline-flex;
-  white-space: nowrap; /* Prevent content from wrapping */
-  animation: scroll 7s linear infinite;
-}
-
-.animate-scroll-reverse {
-  display: inline-flex;
+/* Continuous scrolling animation */
+.animate-loop {
+  display: flex;
   white-space: nowrap;
-  animation: scroll-reverse 7s linear infinite;
+  animation: scrollLoop 9s linear infinite;
+}
+
+/* Continuous reverse scrolling animation */
+.animate-loop-reverse {
+  display: flex;
+  white-space: nowrap;
+  animation: scrollLoopReverse 9s linear infinite;
 }
