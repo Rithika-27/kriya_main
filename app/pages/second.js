@@ -3,39 +3,33 @@
 import { useState } from "react";
 
 export default function Page() {
-  const [bulgedCard, setBulgedCard] = useState(null); // State for tracking bulged card
   const [currentPage, setCurrentPage] = useState(0); // State to track the current page
+  
 
   // Pages of cards
   const pages = [
     [
-      { title: "C1", subtitle: "(Dec - Feb)", theme: "Blockchain Era" },
-      { title: "C2", subtitle: "(Mar - May)", theme: "AI Revolution" },
-      { title: "C3", subtitle: "(Jun - Aug)", theme: "Cloud Computing" },
+      { image: "/images/image1.jpeg", title: "Spatial AI in Mobile Robotics", number: "W1" },
+      { image: "/images/image2.jpeg", title: "Blockchain Era", number: "W2" },
+      { image: "/images/image3.jpeg", title: "AI Revolution", number: "W3" },
     ],
     [
-      { title: "C4", subtitle: "(Sep - Nov)", theme: "Cybersecurity" },
-      { title: "C5", subtitle: "(Dec - Feb)", theme: "Quantum Computing" },
-      { title: "C6", subtitle: "(Mar - May)", theme: "Data Science" },
+      { image: "/images/image4.jpeg", title: "Cybersecurity", number: "W4" },
+      { image: "/images/image5.jpg", title: "Quantum Computing", number: "W5" },
+      { image: "/images/images6.avif", title: "Data Science", number: "W6" },
     ],
     [
-      { title: "C7", subtitle: "(Jun - Aug)", theme: "IoT Revolution" },
-      { title: "C8", subtitle: "(Sep - Nov)", theme: "Green Technology" },
-      { title: "C9", subtitle: "(Dec - Feb)", theme: "Space Tech" },
+      { image: "/path-to-image-7.jpg", title: "IoT Revolution", number: "W7" },
+      { image: "/path-to-image-8.jpg", title: "Green Technology", number: "W8" },
+      { image: "/path-to-image-9.jpg", title: "Space Tech", number: "W9" },
     ],
   ];
-
-  // Handle card click
-  const handleCardClick = (index) => {
-    setBulgedCard(index); // Set the clicked card as bulged
-  };
 
   // Handle navigation
   const handleNextPage = (e) => {
     e.stopPropagation(); // Prevent background click
     if (currentPage < pages.length - 1) {
       setCurrentPage((prevPage) => prevPage + 1); // Move to the next page
-      setBulgedCard(null); // Reset bulged card
     }
   };
 
@@ -43,8 +37,12 @@ export default function Page() {
     e.stopPropagation(); // Prevent background click
     if (currentPage > 0) {
       setCurrentPage((prevPage) => prevPage - 1); // Move to the previous page
-      setBulgedCard(null); // Reset bulged card
     }
+  };
+  const handleCardFlip = (index) => {
+    const newFlippedCards = [...flippedCards];
+    newFlippedCards[index] = !newFlippedCards[index]; // Toggle the flipped state of the clicked card
+    setFlippedCards(newFlippedCards);
   };
 
   return (
@@ -55,36 +53,35 @@ export default function Page() {
         <span className="text-3xl font-bold">WORKSHOPS</span>
       </h1>
 
-      {/* Cards Container */}
-      <div
-        className="relative flex justify-center items-center gap-12"
-        onClick={(e) => e.stopPropagation()} // Prevent background click handler
-      >
-        {pages[currentPage].map((card, index) => (
-          <div
-            key={index}
-            onClick={() => handleCardClick(index)} // Handle card click
-            className={`relative w-[330px] h-[330px] bg-teal-200 text-black p-4 rounded-lg shadow-lg transition-transform duration-300 border-t-4 border-b-4 border-black ${bulgedCard === index ? "scale-110" : ""
-              }`}
-            style={{
-              transform: `translateY(${index === 0
-                ? -50 // Raise the first card
-                : index === 2
-                  ? 50 // Lower the third card
-                  : 0 // Keep the second card at default
-                }px)`,
-            }}
-          >
-            <h1 className="text-4xl font-bold">{card.title}</h1>
-            <p className="text-2xl font-bold mt-2">{card.subtitle}</p>
-            <p className="text-sm font-semibold mt-4">Theme: {card.theme}</p>
-            <p className="text-xs mt-2">Winter Season</p>
-            <p className="text-xs">2023 Online Lectures</p>
-            <p className="text-xs mt-2">Tickets are available online</p>
-            <p className="text-xs font-semibold">block.app</p>
-          </div>
-        ))}
+      <div className="relative flex justify-center items-center gap-12">
+  {pages[currentPage].map((card, index) => (
+    <div
+      key={index}
+      className={`relative w-[300px] h-[400px] bg-white text-black p-4 rounded-lg shadow-lg transition-transform duration-300 flex flex-col items-center ${index === 0 ? 'translate-y-[-25px]' : ''} ${index === 2 ? 'translate-y-[25px]' : ''}`}
+    >
+      {/* Image */}
+      <img
+        src={card.image}
+        alt={card.title}
+        className="w-full h-[60%] object-cover rounded-md"
+      />
+      {/* Title and Number */}
+      <div className="w-full flex justify-between items-center mt-4">
+        <h1 className="text-lg">{card.title}</h1>
+        <span className="text-7xl font-bold bg-gradient-to-r from-purple-700 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          {card.number}
+        </span>
       </div>
+      {/* Explore Button */}
+      <button className="absolute left-3 bottom-3 text-sm bg-purple-700 text-white px-3 py-1 rounded-md hover:bg-purple-800 transition">
+        Explore more
+      </button>
+    </div>
+  ))}
+</div>
+
+
+
 
       {/* Navigation Arrows */}
       {currentPage > 0 && (
@@ -97,7 +94,7 @@ export default function Page() {
       )}
       {currentPage < pages.length - 1 && (
         <button
-          className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-gray-600 text-white px-4 py-2 rounded-full hover:bg-gray-800 transition"
+          className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-800 transition"
           onClick={handleNextPage}
         >
           →
